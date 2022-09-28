@@ -1,0 +1,118 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Empleado</title>
+  <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+  <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+  <nav th:replace="fragments/components::navbar"></nav>
+  <div class="d-flex flex-column" id="content-wrapper">
+    <div id="content">
+      <nav th:replace="fragments/components::header"></nav>
+      <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-dark mb-0">Asignar usuario</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" th:href="@{/employee/list}"><i class="fas fa-list fa-sm text-white-50"></i>&nbsp;Listado de empleados</a>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card shadow mb-3">
+              <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold">Información del empleado</p>
+              </div>
+              <div class="card-body">
+                <div th:if="${status == 1}" class="alert alert-success" role="alert" th:text="${msg}">
+                </div>
+                <div th:if="${status == 0}" class="alert alert-danger" role="alert" th:text="${msg}">
+                </div>
+                <form th:object="${usuario}" method="post" th:action="@{/user}">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <input type="hidden" th:field="*{id}" name="id">
+                        <input type="hidden" name="employee" th:value="${employee.id}">
+                        <label class="form-label" for="name"><strong>Nombre</strong></label>
+                        <input class="form-control" type="text" required th:value="${employee.name}" id="name" placeholder="Nombre" name="name">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="lastname"><strong>Apellido</strong></label>
+                        <input class="form-control" type="text" required id="lastname" th:value="${employee.lastname}" placeholder="Apellido" name="Apellido">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="email"><strong>E-mail</strong></label>
+                        <input class="form-control" type="email" required id="email" th:value="${employee.email}" placeholder="Correo" name="email">
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="username"><strong>Nombre de usuario</strong></label>
+                        <input class="form-control" type="text" required id="username" th:field="*{userName}" placeholder="Nombre de usuario" name="userName">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="image"><strong>Imagen (url)</strong></label>
+                        <input class="form-control" type="text" id="image" th:field="*{image}" placeholder="Imagen (url)" name="image">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="phone"><strong>Teléfono</strong></label>
+                        <input class="form-control" type="tel"  id="phone" th:field="*{phone}" placeholder="teléfono" name="teléfono">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="role"><strong>Rol</strong></label>
+                       <select id="role" th:field="*{rol}" class="form-control">
+                         <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.name}"></option>
+                       </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label class="form-label" for="password"><strong>Contraseña</strong></label>
+                        <input class="form-control" type="password" id="password" name="password">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <button class="btn btn-primary btn-sm" type="submit" th:text="${user.id != 0 ? 'Actualizar':'Registrar'}">Registrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/components::footer"></footer>
+  </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/chart.min.js}"></script>
+<script th:src="@{/assets/js/bs-init.js}"></script>
+<script th:src="@{/assets/js/theme.js}"></script>
+</body>
+
+</html>
